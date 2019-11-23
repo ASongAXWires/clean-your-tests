@@ -16,8 +16,7 @@ describe('Pricing', () => {
     getEmployerContributionSpy,
     calculateVolLifePricePerRoleSpy,
     calculateVolLifePriceSpy,
-    calculateLTDPriceSpy,
-    calculateProductPriceSpy
+    calculateLTDPriceSpy
 
 
   beforeEach(() => {
@@ -28,7 +27,6 @@ describe('Pricing', () => {
     calculateVolLifePricePerRoleSpy = sandbox.spy(pricing, 'calculateVolLifePricePerRole')
     calculateVolLifePriceSpy = sandbox.spy(pricing, 'calculateVolLifePrice')
     calculateLTDPriceSpy = sandbox.spy(pricing, 'calculateLTDPrice')
-    calculateProductPriceSpy = sandbox.spy(pricing, 'calculateProductPrice')
   })
 
   afterEach(() => {
