@@ -16,7 +16,8 @@ describe('Pricing', () => {
     getEmployerContributionSpy,
     calculateVolLifePricePerRoleSpy,
     calculateVolLifePriceSpy,
-    calculateLTDPriceSpy
+    calculateLTDPriceSpy,
+    calculateCommuterPriceSpy
 
 
   beforeEach(() => {
@@ -27,6 +28,7 @@ describe('Pricing', () => {
     calculateVolLifePricePerRoleSpy = sandbox.spy(pricing, 'calculateVolLifePricePerRole')
     calculateVolLifePriceSpy = sandbox.spy(pricing, 'calculateVolLifePrice')
     calculateLTDPriceSpy = sandbox.spy(pricing, 'calculateLTDPrice')
+    calculateCommuterPriceSpy = sandbox.spy(pricing, 'calculateCommuterPrice')
   })
 
   afterEach(() => {
@@ -172,6 +174,20 @@ describe('Pricing', () => {
       expect(formatPriceSpy).to.have.callCount(1)
       expect(getEmployerContributionSpy).to.have.callCount(1)
       expect(calculateLTDPriceSpy).to.have.callCount(1)
+    })
+
+    it('returns the price of a commuter product with employer contribution', () => {
+      const selectedOptions = {
+        benefit: 'train'
+      }
+
+      const price = pricing.calculateProductPrice(products.commuter, employee, selectedOptions)
+
+      expect(price).to.equal(9.75)
+
+      expect(formatPriceSpy).to.have.callCount(1)
+      expect(getEmployerContributionSpy).to.have.callCount(1)
+      expect(calculateCommuterPriceSpy).to.have.callCount(1)
     })
 
     it('throws an error on unknown product type', () => {
