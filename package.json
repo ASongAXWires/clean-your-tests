@@ -15,8 +15,10 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "chai": "4.2.0",
+    "chai": "^4.2.0",
     "eslint": "^6.3.0",
-    "mocha": "^6.1.4"
+    "mocha": "^6.2.2",
+    "sinon": "^7.5.0",
+    "sinon-chai": "^3.3.0"
   }
 }
