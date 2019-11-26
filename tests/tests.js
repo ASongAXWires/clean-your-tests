@@ -44,8 +44,6 @@ describe('Pricing', () => {
       const price = pricing.calculateLTDPrice(products.longTermDisability, employee, selectedOptions)
 
       expect(price).to.equal(32.04)
-
-      expect(calculateLTDPriceSpy).to.have.callCount(1)
     })
 
   })
@@ -92,8 +90,6 @@ describe('Pricing', () => {
       const price = pricing.calculateVolLifePricePerRole(selectedOptions.coverageLevel[0].role, selectedOptions.coverageLevel, products.voluntaryLife.costs)
 
       expect(price).to.equal(43.75)
-
-      expect(calculateVolLifePricePerRoleSpy).to.have.callCount(1)
     })
 
     it('returns the price for a spouse', () => {
@@ -106,8 +102,6 @@ describe('Pricing', () => {
       const price = pricing.calculateVolLifePricePerRole(selectedOptions.coverageLevel[0].role, selectedOptions.coverageLevel, products.voluntaryLife.costs)
 
       expect(price).to.equal(10.2)
-
-      expect(calculateVolLifePricePerRoleSpy).to.have.callCount(1)
     })
   })
 
@@ -116,16 +110,12 @@ describe('Pricing', () => {
       const dollarsOff = pricing.getEmployerContribution(products.voluntaryLife.employerContribution, 39.37)
 
       expect(dollarsOff).to.equal(3.937)
-
-      expect(getEmployerContributionSpy).to.have.callCount(1)
     })
 
     it('returns the price based on dollars mode', () => {
       const dollarsOff = pricing.getEmployerContribution(products.commuter.employerContribution, 39.37)
 
       expect(dollarsOff).to.equal(75)
-
-      expect(getEmployerContributionSpy).to.have.callCount(1)
     })
   })
 
@@ -188,6 +178,27 @@ describe('Pricing', () => {
       const unknownProduct = { type: 'vision' }
 
       expect(() => pricing.calculateProductPrice(unknownProduct, {}, {})).to.throw('Unknown product type: vision')
+    })
+  })
+
+  describe('calculateCommuterPrice', () => {
+    it('returns the price for a train commuter', () => {
+      const selectedOptions = {
+        benefit: 'train'
+      }
+
+      const price = pricing.calculateCommuterPrice(products.commuter, selectedOptions)
+
+      expect(price).to.equal(84.75)
+    })
+    it('returns the price for a parking commuter', () => {
+      const selectedOptions = {
+        benefit: 'parking'
+      }
+
+      const price = pricing.calculateCommuterPrice(products.commuter, selectedOptions)
+
+      expect(price).to.equal(250)
     })
   })
 })
